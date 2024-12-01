@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginForm from "./Pages/LoginForm.jsx";
 import RegisterForm from "./Pages/RegisterForm.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
+import ProductPage from "./Pages/ProductPage.jsx";
 
 //pake create browser untuk membuat path agar bisa pindah2
 const root = createBrowserRouter([
@@ -13,17 +14,21 @@ const root = createBrowserRouter([
     // path apa yang mau di tampilkan kaya login/register
     path: "/",
     element: <div>hello world</div>,
-    errorElement:<ErrorPage/>
+    errorElement: <ErrorPage />,
   },
   {
     // path apa yang mau di tampilkan kaya login/register
     path: "/login",
-    element: <LoginForm/>
+    element: <LoginForm />,
   },
   {
     // path apa yang mau di tampilkan kaya login/register
     path: "/register",
-    element: <RegisterForm/>
+    element: <RegisterForm />,
+  },
+  {
+    path: "/product",
+    element: <ProductPage />,
   },
 ]);
 
