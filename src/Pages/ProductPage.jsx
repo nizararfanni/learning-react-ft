@@ -1,32 +1,53 @@
 import React from "react";
-import Button from "../Components/Button/Index";
+import CardProduct from "../Components/Fragments/CardProduct";
+
+const products = [
+  {
+    id: "1",
+    name: "new shoes",
+    price: "Rp.1.000.000",
+    image: "/src/assets/images/shoes-1.jpg",
+    description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
+          tempore totam recusandae delectus qui necessitatibus non voluptatibus!
+          Libero qui nihil reiciendis distinctio soluta? Consequatur, quasi
+          provident. Consequatur molestiae nesciunt eligendi.`,
+  },
+  {
+    id: "1",
+    name: "new shoes",
+    price: "Rp.100.000.000",
+    image: "/src/assets/images/shoes-1.jpg",
+    description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
+          tempore totam recusandae delectus qui necessitatibus non voluptatibus!
+          Libero qui nihil reiciendis distinctio soluta? Consequatur, quasi
+          provident. Consequatur molestiae nesciunt eligendi.`,
+  },
+  {
+    id: "1",
+    name: "new shoes",
+    price: "Rp 500.000",
+    image: "/src/assets/images/shoes-1.jpg",
+    description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
+          tempore totam recusandae delectus qui necessitatibus non voluptatibus!
+          Libero qui nihil reiciendis distinctio soluta? Consequatur, quasi
+          provident. Consequatur molestiae nesciunt eligendi.`,
+  },
+];
 
 const ProductPage = () => {
   return (
-    <div className="flex justify-center">
-      <div className="bg-gray-800 w-full max-w-sm border border-gray-700 rounded-lg shadow">
-        <a href="#">
-          <img
-            src="/src/assets/images/shoes-1.jpg"
-            alt="product-1"
-            className="p-8 rounded-t-lg"
-          />
-        </a>
-        <div className="px-5 pb-5">
-          <a href="">
-            <h5 className="font-semibold text-xl text-white tracking-tight">
-              sepatu baru
-            </h5>
-            <p className="text-white text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Id minus culpa praesentium nam nemo enim aliquam velit optio a voluptates ea odit exercitationem magnam nihil officia, ut similique omnis deleniti.
-            </p>
-          </a>
-        </div>
-        <div className="flex items-center justify-between p-5">
-            <span className="text-white text-xl font-bold">Rp 1.000.000</span>
-            <Button classname="bg-blue-600 hover:bg-blue-800">Masukan ke keranjang</Button>
-        </div>
-      </div>
+    <div className="flex justify-center gap-4 flex-wrap">
+      {/* rendering list kita gunakan map untuk mnegiterasi produkcts di atas dan mengambil data di atas yang berupa array objek*/}
+      {products.map((product) => (
+        <CardProduct>
+          <CardProduct.Header image={product.image}></CardProduct.Header>
+          <CardProduct.Body name={product.name}>
+            {" "}
+            {product.description}
+          </CardProduct.Body>
+          <CardProduct.Footer price={product.price}></CardProduct.Footer>
+        </CardProduct>
+      ))}
     </div>
   );
 };
