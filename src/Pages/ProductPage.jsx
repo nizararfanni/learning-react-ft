@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import CardProduct from "../Components/Fragments/CardProduct";
 import Button from "../Components/Button/Index";
 
@@ -6,7 +6,7 @@ const products = [
   {
     id: 1,
     name: "new shoes",
-    price: "Rp.1.000.000",
+    price: 1000000,
     image: "/src/assets/images/shoes-1.jpg",
     description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
           tempore totam recusandae delectus qui necessitatibus non voluptatibus!
@@ -16,7 +16,7 @@ const products = [
   {
     id: 2,
     name: "new shoes",
-    price: "Rp.100.000.000",
+    price: 5000000,
     image: "/src/assets/images/shoes-1.jpg",
     description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
           tempore totam recusandae delectus qui necessitatibus non voluptatibus!
@@ -26,7 +26,7 @@ const products = [
   {
     id: 3,
     name: "new shoes",
-    price: "Rp 500.000",
+    price: 7000000,
     image: "/src/assets/images/shoes-1.jpg",
     description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
           tempore totam recusandae delectus qui necessitatibus non voluptatibus!
@@ -45,6 +45,12 @@ const handleLogOut = () => {
 };
 
 const ProductPage = () => {
+  const [cart, setCart] = useState([
+    {
+      name: "sepatu baru",
+      qty: 1,
+    },
+  ]);
   return (
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
     <Fragment>
@@ -57,19 +63,34 @@ const ProductPage = () => {
           Log Out
         </Button>
       </div>
-      <div className="flex justify-center gap-4 flex-wrap">
-        {/* rendering list kita gunakan map untuk mnegiterasi produkcts di atas dan mengambil data di atas yang berupa array objek*/}
-        {products.map((product) => (
-          <CardProduct key={product.id}>
-            <CardProduct.Header image={product.image}></CardProduct.Header>
-            <CardProduct.Body name={product.name}>
-              {" "}
-              {product.description}
-            </CardProduct.Body>
-            <CardProduct.Footer price={product.price}></CardProduct.Footer>
-          </CardProduct>
-        ))}
+      <div className="flex justify-center  ">
+        {/* atur lebar product jadi 3/4 bagian layar atau 75% */}
+        <div className="w-3/4 flex flex-wrap">
+          {/* rendering list kita gunakan map untuk mnegiterasi produkcts di atas dan mengambil data di atas yang berupa array objek*/}
+          {products.map((product) => (
+            <CardProduct key={product.id}>
+              <CardProduct.Header image={product.image}></CardProduct.Header>
+              <CardProduct.Body name={product.name}>
+                {" "}
+                {product.description}
+              </CardProduct.Body>
+              <CardProduct.Footer price={product.price}></CardProduct.Footer>
+            </CardProduct>
+          ))}
+        </div>
+        <div className="w-1/4">
+          <h1 className="text-3xl font-bold text-blue-600">Cart</h1>
+          <ul>
+            {cart.map((item) =>(
+              <li key={item.name}>{item.name}</li>
+            ))}
+          </ul>
+        </div>
       </div>
+      {/* coba classcomponent saaja walau sudah tdk di gunakan */}
+      {/* <div className="flex justify-center">
+        <Counter></Counter>
+      </div> */}
     </Fragment>
   );
 };

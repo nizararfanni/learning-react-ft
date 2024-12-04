@@ -4,7 +4,7 @@ import Button from "../Button/Index";
 const CardProduct = (props) => {
   const { children } = props;
   return (
-    <div className="flex flex-col justify-between w-full max-w-sm border bg-gray-800 border-gray-700 rounded-lg shadow items-center ">
+    <div className="flex flex-col justify-between w-full max-w-sm border bg-gray-800 border-gray-700 rounded-lg shadow items-center mx-1">
       {children}
     </div>
   );
@@ -42,7 +42,11 @@ const Footer = (props) => {
   const { price } = props;
   return (
     <div className="flex items-center justify-between p-5 w-full">
-      <span className="text-white text-xl font-bold">{price}</span>
+      <span className="text-white text-xl font-bold">
+        {/* use tolocalestring untuk mengubah harga ke idr secara otomatis */}
+        Rp
+        {price.toLocaleString("id-ID", { styles: "currency", currency: "IDR" })}
+      </span>
       <Button classname="bg-blue-600 hover:bg-blue-800 ">
         Masukan keranjang
       </Button>
