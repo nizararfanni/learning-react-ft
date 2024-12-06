@@ -47,10 +47,21 @@ const handleLogOut = () => {
 const ProductPage = () => {
   const [cart, setCart] = useState([
     {
-      name: "sepatu baru",
+      id: 1,
       qty: 1,
     },
   ]);
+
+  // function buat add card
+  const handleAddToCard = (id) => {
+    setCart([
+      ...cart,
+      {
+        id,
+        qty: 1,
+      },
+    ]);
+  };
   return (
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
     <Fragment>
@@ -74,17 +85,43 @@ const ProductPage = () => {
                 {" "}
                 {product.description}
               </CardProduct.Body>
-              <CardProduct.Footer price={product.price}></CardProduct.Footer>
+              <CardProduct.Footer
+                price={product.price}
+                // id card
+                id={product.id}
+                // property tangkap funtion handle card
+                handleAddToCard={handleAddToCard}
+              ></CardProduct.Footer>
             </CardProduct>
           ))}
         </div>
         <div className="w-1/4">
           <h1 className="text-3xl font-bold text-blue-600">Cart</h1>
-          <ul>
-            {cart.map((item) =>(
-              <li key={item.name}>{item.name}</li>
-            ))}
-          </ul>
+          <table>
+            <thead>
+              <tr>
+                <td>Product</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>tottal</td>
+              </tr>
+            </thead>
+            <tbody>
+              {cart.map((item) => {
+                const product = products.find(
+                  (product) => product.id === item.id
+                );
+                return (
+                  <tr key={item.id}>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{item.qty}</td>
+                    <td>{item.qty * product.price}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
       {/* coba classcomponent saaja walau sudah tdk di gunakan */}
