@@ -15,7 +15,7 @@ const products = [
   },
   {
     id: 2,
-    name: "new shoes",
+    name: "new brand",
     price: 5000000,
     image: "/src/assets/images/shoes-1.jpg",
     description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: 3,
-    name: "new shoes",
+    name: "old shoes",
     price: 7000000,
     image: "/src/assets/images/shoes-1.jpg",
     description: ` Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus
@@ -54,13 +54,15 @@ const ProductPage = () => {
 
   // function buat add card
   const handleAddToCard = (id) => {
-    setCart([
-      ...cart,
-      {
-        id,
-        qty: 1,
-      },
-    ]);
+    if (cart.find((item) => item.id === id)) {
+      setCart(
+        cart.map((item) =>
+          item.id === id ? { ...item, qty: item.qty + 1 } : item
+        )
+      );
+    } else {
+      setCart([...cart, { id, qty: 1 }]);
+    }
   };
   return (
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
@@ -76,7 +78,7 @@ const ProductPage = () => {
       </div>
       <div className="flex justify-center  ">
         {/* atur lebar product jadi 3/4 bagian layar atau 75% */}
-        <div className="w-3/4 flex flex-wrap">
+        <div className="w-4/6 flex flex-wrap">
           {/* rendering list kita gunakan map untuk mnegiterasi produkcts di atas dan mengambil data di atas yang berupa array objek*/}
           {products.map((product) => (
             <CardProduct key={product.id}>
@@ -95,18 +97,20 @@ const ProductPage = () => {
             </CardProduct>
           ))}
         </div>
-        <div className="w-1/4">
+        <div className="w-2/6">
           <h1 className="text-3xl font-bold text-blue-600">Cart</h1>
-          <table>
+          <table className="text-left table-auto border-separate border-spacing-x-5">
+            {/* keranjang belanja */}
             <thead>
               <tr>
-                <td>Product</td>
-                <td>Price</td>
-                <td>Quantity</td>
-                <td>tottal</td>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>tottal</th>
               </tr>
             </thead>
             <tbody>
+              {/* mapping state card terus cari di product,kalo productnya id nya sama kaya item id(ini di state card guys) nya return nama harga quantity dan total dari barang */}
               {cart.map((item) => {
                 const product = products.find(
                   (product) => product.id === item.id
@@ -114,9 +118,21 @@ const ProductPage = () => {
                 return (
                   <tr key={item.id}>
                     <td>{product.name}</td>
-                    <td>{product.price}</td>
+                    <td>
+                      {" "}
+                      {product.price.toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
                     <td>{item.qty}</td>
-                    <td>{item.qty * product.price}</td>
+                    <td>
+                      Rp.
+                      {(item.qty * product.price).toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "IDR",
+                      })}
+                    </td>
                   </tr>
                 );
               })}
