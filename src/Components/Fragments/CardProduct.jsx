@@ -39,7 +39,7 @@ const Body = (props) => {
 
 // footer isinya sebuah footer biasa kaya ket harga dan button
 const Footer = (props) => {
-  const { price,handleAddToCard ,id} = props;
+  const { price,handleAddToCard2 ,id} = props;
   return (
     <div className="flex items-center justify-between p-5 w-full">
       <span className="text-white text-xl font-bold">
@@ -47,7 +47,7 @@ const Footer = (props) => {
         Rp
         {price.toLocaleString("id-ID", { styles: "currency", currency: "IDR" })}
       </span>
-      <Button classname="bg-blue-600 hover:bg-blue-800" onClick={() =>handleAddToCard(id)}>
+      <Button classname="bg-blue-600 hover:bg-blue-800" onClick={() =>handleAddToCard2(id)}>
         Masukan keranjang
       </Button>
     </div>
