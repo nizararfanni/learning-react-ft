@@ -92,7 +92,7 @@ const ProductPage = () => {
                 // id card
                 id={product.id}
                 // property tangkap funtion handle card
-                handleAddToCard={handleAddToCard}
+                handleAddToCard2={handleAddToCard}
               ></CardProduct.Footer>
             </CardProduct>
           ))}
@@ -140,10 +140,6 @@ const ProductPage = () => {
           </table>
         </div>
       </div>
-      {/* coba classcomponent saaja walau sudah tdk di gunakan */}
-      {/* <div className="flex justify-center">
-        <Counter></Counter>
-      </div> */}
     </Fragment>
   );
 };
