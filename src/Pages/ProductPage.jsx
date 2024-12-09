@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import CardProduct from "../Components/Fragments/CardProduct";
 import Button from "../Components/Button/Index";
 
@@ -82,6 +82,18 @@ const ProductPage = () => {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
+
+  const totalPriceRef = useRef(null);
+
+  // set total price agar hilang jika tdk ada barang
+  useEffect(() => {
+    if (cart.length > 0) {
+      totalPriceRef.current.style.display = "table-row";
+    } else {
+      totalPriceRef.current.style.display = "none";
+    }
+  }, [cart]);
+
   return (
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
     <Fragment>
@@ -154,7 +166,7 @@ const ProductPage = () => {
                   </tr>
                 );
               })}
-              <tr>
+              <tr ref={totalPriceRef}>
                 <td colSpan={3}>
                   <b>Total price</b>
                 </td>
