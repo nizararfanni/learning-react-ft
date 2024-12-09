@@ -1,6 +1,6 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-const Input = (props) => {
+const Input = forwardRef((props,ref) => {
   const { type, placeholder, name } = props;
   return (
     <input
@@ -8,8 +8,9 @@ const Input = (props) => {
       className="text-sm border rounded w-full text-slate-700 py-2 px-3 placeholder: opacity-50"
       placeholder={placeholder}
       name={name}
+      ref={ref}
     />
   );
-};
+});
 
 export default Input;
