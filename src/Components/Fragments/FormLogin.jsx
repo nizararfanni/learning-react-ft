@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "../Button/Index";
 import InputForm from "../Input/Index";
 import { login } from "../../service/auth.service";
 
 const FormLogin = () => {
+  // set failed logen while post data
+  const [failedLogen, setFailedLogen] = useState("");
   const handleLogin = (event) => {
     // agaar tidak refresh halaman loginya
     event.preventDefault();
@@ -17,8 +19,16 @@ const FormLogin = () => {
       password: event.target.Password.value,
     };
 
-    login(data);
-    console.log("login");
+    // post data ke api,jika status true maka simpan token ke localstrorage
+    login(data, (status, res) => {
+      if (status) {
+        localStorage.setItem("token", res);
+        // jika gagal maka munculkan new message error
+      } else {
+        setFailedLogen(res.response.data);
+        console.log(res.response.data);
+      }
+    });
   };
 
   //untuk menggunakan usereff sebagai props kita harus pake forward reff di komponen anak
@@ -31,6 +41,7 @@ const FormLogin = () => {
     <div>
       {/* onSubmit untuk ketika form di submit */}
       <form onSubmit={handleLogin}>
+        {failedLogen && <p className="items-center text-center text-red-500 text-bold text-2xl">{failedLogen}</p>}
         <InputForm
           label="username"
           type="text"
