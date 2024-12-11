@@ -1,10 +1,10 @@
 import axios from "axios";
-// callback
-export const getProduct = (call) => {
+
+export const login = (data) => {
   axios
-    .get("https://fakestoreapi.com/products")
+    .post("'https://fakestoreapi.com/auth/login", data)
     .then((res) => {
-      call(res.data)
+      console.log(res);
     })
     .catch((err) => {
       console.error(err);
