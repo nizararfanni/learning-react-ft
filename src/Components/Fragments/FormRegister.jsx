@@ -1,10 +1,11 @@
 import React from 'react'
-import InputForm from "../Input";
+
 import Button from "../Button/Index";
+import InputForm from '../Input/Index';
 
 const FormRegister = () => {
   return (
-    <div>
+    <div className='border-2 border-blue-500 p-10  shadow-2xl'>
     <form action="">
       <InputForm
         label="Full Name"

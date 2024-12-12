@@ -23,6 +23,7 @@ const FormLogin = () => {
     login(data, (status, res) => {
       if (status) {
         localStorage.setItem("token", res);
+        window.location.href = "/product";
         // jika gagal maka munculkan new message error
       } else {
         setFailedLogen(res.response.data);
@@ -38,10 +39,9 @@ const FormLogin = () => {
   }, []);
 
   return (
-    <div>
+    <div className="border-2 border-blue-500 p-10  shadow-2xl">
       {/* onSubmit untuk ketika form di submit */}
       <form onSubmit={handleLogin}>
-        {failedLogen && <p className="items-center text-center text-red-500 text-bold text-2xl">{failedLogen}</p>}
         <InputForm
           label="username"
           type="text"
@@ -59,6 +59,9 @@ const FormLogin = () => {
         <Button classname="bg-blue-600 w-full" type={"submit"}>
           Logen
         </Button>
+        {failedLogen && (
+          <p className="items-center text-center text-red-500">{failedLogen}</p>
+        )}
       </form>
     </div>
   );
