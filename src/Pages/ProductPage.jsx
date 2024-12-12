@@ -3,13 +3,12 @@ import CardProduct from "../Components/Fragments/CardProduct";
 import Button from "../Components/Button/Index";
 import { getProduct } from "../service/product.service";
 import { data } from "react-router-dom";
+import { getUsername } from "../service/auth.service";
 
-// tangkap email dr local storage
-const email = localStorage.getItem("email");
 // atur function agar log out dari halaman product
 const handleLogOut = () => {
   // hapus email dan password dari local stroage
-  localStorage.removeItem("email");
+  localStorage.removeItem("token");
   localStorage.removeItem("Password");
   window.location.href = "/login";
 };
@@ -18,12 +17,24 @@ const ProductPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
+  const [username, setUsername] = useState("");
 
   // useeffect like componentdidmount untuk update state
   useEffect(() => {
     // parsing data dari json kembali ke objek biasa
     setCart(JSON.parse(localStorage.getItem("card")) || []);
   }, []);
+  useEffect(() => {
+    // tangkap email dr local storage
+    const token = localStorage.getItem("token");
+    if (token) {
+      // ambil username dr token
+      setUsername(getUsername(token));
+    } else {
+      //kalo token gada tetap di login
+      window.location.href = "/login";
+    }
+  });
   // use effect total price
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
@@ -68,7 +79,7 @@ const ProductPage = () => {
   //get product from api with callback
   useEffect(() => {
     getProduct((data) => {
-      setProducts(data)
+      setProducts(data);
     });
   }, []);
 
@@ -76,7 +87,7 @@ const ProductPage = () => {
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
     <Fragment>
       <div className="flex justify-end bg-blue-600 h-20 px-10 items-center text-white">
-        {email}
+        {username}
         <Button
           classname=" ml-5 bg-orange-600 hover:bg-orange-700"
           onClick={handleLogOut}
@@ -127,7 +138,7 @@ const ProductPage = () => {
                   );
                   return (
                     <tr key={item.id}>
-                      <td>{product.title.substring(0,10)}...</td>
+                      <td>{product.title.substring(0, 10)}...</td>
                       <td>
                         {" "}
                         {product.price.toLocaleString("id-ID", {
