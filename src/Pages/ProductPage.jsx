@@ -3,7 +3,7 @@ import CardProduct from "../Components/Fragments/CardProduct";
 import Button from "../Components/Button/Index";
 import { getProduct } from "../service/product.service";
 import { data } from "react-router-dom";
-import { getUsername } from "../service/auth.service";
+import { useLogin } from "../hooks/useLogin";
 
 // atur function agar log out dari halaman product
 const handleLogOut = () => {
@@ -17,24 +17,14 @@ const ProductPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const [username, setUsername] = useState("");
+  const username = useLogin()
 
   // useeffect like componentdidmount untuk update state
   useEffect(() => {
     // parsing data dari json kembali ke objek biasa
     setCart(JSON.parse(localStorage.getItem("card")) || []);
   }, []);
-  useEffect(() => {
-    // tangkap email dr local storage
-    const token = localStorage.getItem("token");
-    if (token) {
-      // ambil username dr token
-      setUsername(getUsername(token));
-    } else {
-      //kalo token gada tetap di login
-      window.location.href = "/login";
-    }
-  });
+  
   // use effect total price
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {

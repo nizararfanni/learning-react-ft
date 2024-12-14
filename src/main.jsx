@@ -7,6 +7,7 @@ import LoginForm from "./Pages/LoginForm.jsx";
 import RegisterForm from "./Pages/RegisterForm.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import ProductPage from "./Pages/ProductPage.jsx";
+import ProfilPage from "./Pages/ProfilPage.jsx";
 
 //pake create browser untuk membuat path agar bisa pindah2
 const root = createBrowserRouter([
@@ -30,6 +31,10 @@ const root = createBrowserRouter([
     path: "/product",
     element: <ProductPage />,
   },
+  {
+    path : "/profil",
+    element: <ProfilPage/>
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
