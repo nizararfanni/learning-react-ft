@@ -10,3 +10,13 @@ export const getProduct = (call) => {
       console.error(err);
     });
 };
+export const getDetailProduct = (id,call) => {
+  axios
+    .get(`https://fakestoreapi.com/products/${id}`)
+    .then((res) => {
+      call(res.data)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};

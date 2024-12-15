@@ -8,6 +8,7 @@ import RegisterForm from "./Pages/RegisterForm.jsx";
 import ErrorPage from "./Pages/ErrorPage.jsx";
 import ProductPage from "./Pages/ProductPage.jsx";
 import ProfilPage from "./Pages/ProfilPage.jsx";
+import ProductDetail from "./Pages/ProductDetail.jsx";
 
 //pake create browser untuk membuat path agar bisa pindah2
 const root = createBrowserRouter([
@@ -28,13 +29,18 @@ const root = createBrowserRouter([
     element: <RegisterForm />,
   },
   {
-    path: "/product",
+    path: "/products",
     element: <ProductPage />,
   },
   {
-    path : "/profil",
-    element: <ProfilPage/>
-  }
+    path: "/profil",
+    element: <ProfilPage />,
+  },
+  {
+    // dinamic routing pake id
+    path: "/product/:id",
+    element: <ProductDetail />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
