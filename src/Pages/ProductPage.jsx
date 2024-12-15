@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import CardProduct from "../Components/Fragments/CardProduct";
 import Button from "../Components/Button/Index";
 import { getProduct } from "../service/product.service";
-import { data } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 
 // atur function agar log out dari halaman product
@@ -17,14 +16,14 @@ const ProductPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const username = useLogin()
+  const username = useLogin();
 
   // useeffect like componentdidmount untuk update state
   useEffect(() => {
     // parsing data dari json kembali ke objek biasa
     setCart(JSON.parse(localStorage.getItem("card")) || []);
   }, []);
-  
+
   // use effect total price
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
@@ -92,7 +91,10 @@ const ProductPage = () => {
           {products.length > 0 &&
             products.map((product) => (
               <CardProduct key={product.id}>
-                <CardProduct.Header image={product.image}></CardProduct.Header>
+                <CardProduct.Header
+                  image={product.image}
+                  id={product.id}
+                ></CardProduct.Header>
                 <CardProduct.Body name={product.title}>
                   {" "}
                   {product.description}

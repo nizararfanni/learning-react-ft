@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button/Index";
+import { Link } from "react-router-dom";
 // nested compnent
 const CardProduct = (props) => {
   const { children } = props;
@@ -14,15 +15,15 @@ const CardProduct = (props) => {
 
 //header isinya gambar product
 const Header = (props) => {
-  const { image } = props;
+  const { image,id } = props;
   return (
-    <a href="#">
+    <Link to={ `/product/${id}`}>
       <img
         src={image}
         alt="product-1"
         className="p-8 rounded-t-lg h-60 w-full object-cover"
       />
-    </a>
+    </Link>
   );
 };
 
