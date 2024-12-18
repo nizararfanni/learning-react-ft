@@ -30,6 +30,7 @@ const cartReducer = (
 const store = legacy_createStore(cartReducer);
 console.log("onclick store :", store.getState());
 
+
 // susbcribe untuk melihat perubahan yg di lakukan  di dispacth
 store.subscribe(() => {
   console.log("store_change :", store.getState());
