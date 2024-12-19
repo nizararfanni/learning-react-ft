@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "../Button/Index";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART } from "../../redux/slice/cartSlice";
+
 // nested compnent
 const CardProduct = (props) => {
   const { children } = props;
@@ -15,9 +18,9 @@ const CardProduct = (props) => {
 
 //header isinya gambar product
 const Header = (props) => {
-  const { image,id } = props;
+  const { image, id } = props;
   return (
-    <Link to={ `/product/${id}`}>
+    <Link to={`/product/${id}`}>
       <img
         src={image}
         alt="product-1"
@@ -46,17 +49,17 @@ const Body = (props) => {
 
 // footer isinya sebuah footer biasa kaya ket harga dan button
 const Footer = (props) => {
-  const { price, handleAddToCard2, id } = props;
+  const { price, id } = props;
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center justify-between p-5 w-full">
       <span className="text-white text-xl font-bold">
-        {/* use tolocalestring untuk mengubah harga ke idr secara otomatis */}
-        $
+        {/* use tolocalestring untuk mengubah harga ke idr secara otomatis */}$
         {price.toLocaleString("id-ID", { styles: "currency", currency: "IDR" })}
       </span>
       <Button
         classname="bg-blue-600 hover:bg-blue-800"
-        onClick={() => handleAddToCard2(id)}
+        onClick={() => dispatch(ADD_TO_CART({ id, qty: 1 }))}
       >
         Masukan keranjang
       </Button>
