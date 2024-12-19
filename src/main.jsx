@@ -9,6 +9,8 @@ import ErrorPage from "./Pages/ErrorPage.jsx";
 import ProductPage from "./Pages/ProductPage.jsx";
 import ProfilPage from "./Pages/ProfilPage.jsx";
 import ProductDetail from "./Pages/ProductDetail.jsx";
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
 
 //pake create browser untuk membuat path agar bisa pindah2
 const root = createBrowserRouter([
@@ -45,7 +47,9 @@ const root = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* pake router provider sebagai pasangan cbr */}
-    <RouterProvider router={root} />
+    <Provider store={store}>
+      {/* pake router provider sebagai pasangan create browser router */}
+      <RouterProvider router={root} />
+    </Provider>
   </StrictMode>
 );
