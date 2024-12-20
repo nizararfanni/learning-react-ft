@@ -23,7 +23,7 @@ const FormLogin = () => {
     login(data, (status, res) => {
       if (status) {
         localStorage.setItem("token", res);
-        window.location.href = "/product";
+        window.location.href = "/products";
         // jika gagal maka munculkan new message error
       } else {
         setFailedLogen(res.response.data);
