@@ -1,14 +1,16 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import CardProduct from "../Components/Fragments/CardProduct";
 import { getProduct } from "../service/product.service";
 import { useLogin } from "../hooks/useLogin";
 import TableCard from "../Components/Fragments/TableCard";
 import Navbar from "../Components/Layout/Navbar";
+import { DarkMode } from "../context/DarkMode";
 
 // atur function agar log out dari halaman product
 
-
 const ProductPage = () => {
+  // ambil useContext dari darkmodeContext yg kita buat
+  const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
   const [products, setProducts] = useState([]);
   const username = useLogin();
 
@@ -23,7 +25,7 @@ const ProductPage = () => {
     // karena di react itu tdk bisa pke dua div,bisa gunakan <> kosong atau fragments
     <Fragment>
       <Navbar></Navbar>
-      <div className="flex justify-center  ">
+      <div className={`flex justify-center pt-20  ${isDarkMode && "bg-gray-600"}`}>
         {/* atur lebar product jadi 3/4 bagian layar atau 75% */}
         <div className="w-4/6 flex flex-wrap">
           {/* rendering list kita gunakan map untuk mnegiterasi produkcts di atas dan mengambil data di atas yang berupa array objek*/}
